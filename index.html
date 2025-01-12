@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa para mi Esposa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e1bee7;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        #giftBox {
+            width: 150px;
+            height: 150px;
+            background-color: #8e24aa;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(142, 36, 170, 0.6);
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        #giftBox::before,
+        #giftBox::after {
+            content: '';
+            position: absolute;
+            background-color: #d1c4e9;
+        }
+
+        #giftBox::before {
+            width: 10px;
+            height: 150px;
+        }
+
+        #giftBox::after {
+            width: 150px;
+            height: 10px;
+        }
+
+        #giftBox:hover {
+            transform: scale(1.1);
+        }
+
+        /* Corazones flotantes morados */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ba68c8;
+            transform: rotate(45deg);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ba68c8;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(45deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-300px) rotate(45deg);
+            }
+        }
+
+        /* Corazones rojos */
+        .heartRed {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 0% 40%, 50% 100%, 100% 40%);
+            animation: floatRed 4s ease-in-out infinite;
+        }
+
+        @keyframes floatRed {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(45deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-300px) rotate(45deg);
+            }
+        }
+
+        .floatingText {
+            position: absolute;
+            font-size: 16px;
+            color: #ba68c8;
+            font-weight: bold;
+            animation: floatText 4s ease-in-out infinite;
+        }
+
+        @keyframes floatText {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-300px);
+            }
+        }
+
+        #message {
+            display: none;
+            font-size: 2.5em;
+            color: #6a1b9a;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        #photo {
+            display: none;
+            width: 300px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(106, 27, 154, 0.6);
+            animation: zoomIn 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .flag {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg');
+            background-size: cover;
+            animation: floatFlag 4s ease-in-out infinite;
+        }
+
+        @keyframes floatFlag {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-300px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="giftBox">🎁</div>
+    <div id="message">¡Te amo mi esposa hermosa! 💜</div>
+    <img id="photo" src="assets/Amor.jpg" alt="Foto de amor">
+
+    <script>
+        const giftBox = document.getElementById('giftBox');
+        const message = document.getElementById('message');
+        const photo = document.getElementById('photo');
+
+        const phrases = [
+            "Te amo", "Te adoro", "Te quiero", "Te admiro",
+            "Eres maravillosa", "Eres increíble", "Eres especial"
+        ];
+
+        giftBox.addEventListener('click', () => {
+            giftBox.style.display = 'none';
+            message.style.display = 'block';
+            photo.style.display = 'block';
+
+            for (let i = 0; i < 50; i++) {
+                createHeart();
+                createHeartRed();
+                createFloatingText();
+                createFlag();
+            }
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = Math.random() * window.innerHeight + 'px';
+            heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        function createHeartRed() {
+            const heartRed = document.createElement('div');
+            heartRed.classList.add('heartRed');
+            heartRed.style.left = Math.random() * window.innerWidth + 'px';
+            heartRed.style.top = Math.random() * window.innerHeight + 'px';
+            heartRed.style.animationDuration = 2 + Math.random() * 3 + 's';
+            document.body.appendChild(heartRed);
+            setTimeout(() => heartRed.remove(), 5000);
+        }
+
+        function createFloatingText() {
+            const text = document.createElement('div');
+            text.classList.add('floatingText');
+            text.style.left = Math.random() * window.innerWidth + 'px';
+            text.style.top = Math.random() * window.innerHeight + 'px';
+            text.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+            document.body.appendChild(text);
+            setTimeout(() => text.remove(), 5000);
+        }
+
+        function createFlag() {
+            const flag = document.createElement('div');
+            flag.classList.add('flag');
+            flag.style.left = Math.random() * window.innerWidth + 'px';
+            flag.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(flag);
+            setTimeout(() => flag.remove(), 5000);
+        }
+    </script>
+</body>
+
+</html>
