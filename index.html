@@ -1,272 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorpresa para mi Esposa</title>
+    <title>¿Quieres ser mi San Valentín?</title>
     <style>
+        /* Estilos generales */
         body {
-            margin: 0;
-            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9e3e3;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(to top right, #9c27b0, #ba68c8);
-            overflow: hidden;
-            flex-direction: column;
-            font-family: 'Courier New', Courier, monospace;
-            color: #6a1b9a;
-            animation: backgroundAnimation 10s infinite alternate;
+            margin: 0;
+            padding: 10px; /* Espacio adicional en móviles */
         }
 
-        @keyframes backgroundAnimation {
-            0% {
-                background: linear-gradient(to top right, #9c27b0, #ba68c8);
-            }
-
-            50% {
-                background: linear-gradient(to top right, #ab47bc, #7e57c2);
-            }
-
-            100% {
-                background: linear-gradient(to top right, #7b1fa2, #8e24aa);
-            }
-        }
-
-        #giftBox {
-            width: 180px;
-            height: 180px;
-            background-color: #8e24aa;
-            border-radius: 20%;
-            box-shadow: 0 0 30px rgba(142, 36, 170, 0.6);
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.4s ease, box-shadow 0.3s ease;
-        }
-
-        #giftBox:hover {
-            transform: scale(1.1) translateY(-10px);
-            box-shadow: 0 0 40px rgba(142, 36, 170, 0.8);
-        }
-
-        #giftBox:active {
-            transform: scale(0.9);
-            animation: bounce 0.5s ease;
-        }
-
-        @keyframes bounce {
-            0% {
-                transform: scale(1.1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        #giftBox::before,
-        #giftBox::after {
-            content: '';
-            position: absolute;
-            background-color: #f3e5f5;
-        }
-
-        #giftBox::before {
-            width: 15px;
-            height: 180px;
-        }
-
-        #giftBox::after {
-            width: 180px;
-            height: 15px;
-        }
-
-        /* Corazones morados flotantes */
-        .particle {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #ba68c8;
-            clip-path: polygon(50% 0%, 0% 35%, 100% 35%);
-            animation: floatParticles 10s infinite;
-        }
-
-        @keyframes floatParticles {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-600px) scale(0.5);
-                opacity: 0;
-            }
-        }
-
-        .floatingText {
-            position: absolute;
-            font-size: 18px;
-            color: white;
-            font-weight: bold;
-            animation: floatText 8s ease-in-out infinite;
-        }
-
-        @keyframes floatText {
-            0% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(-500px);
-            }
-        }
-
-        #message {
-            display: none;
-            font-size: 2.8em;
-            color: white;
+        .container {
             text-align: center;
-            font-family: 'Cursive', sans-serif;
-            animation: fadeInOut 4s ease-in-out infinite;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%; /* Ocupa el 90% del ancho en móviles */
+            max-width: 400px; /* Máximo ancho para no estirarse demasiado */
         }
 
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-            }
+        h1 {
+            color: #e74c3c;
+            font-size: 24px; /* Tamaño de fuente más pequeño para móviles */
         }
 
-        #photo {
-            display: none;
-            width: 350px;
-            height: auto;
-            margin-top: 25px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(136, 14, 79, 0.6);
-            animation: zoomIn 2s ease-in-out forwards, moveEffect 5s ease-in-out infinite;
+        h2 {
+            color: #c0392b;
+            font-size: 20px; /* Tamaño de fuente más pequeño para móviles */
         }
 
-        @keyframes zoomIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+        p {
+            font-size: 16px; /* Tamaño de fuente más pequeño para móviles */
+            line-height: 1.6;
         }
 
-        /* Efecto de movimiento suave en la imagen */
-        @keyframes moveEffect {
-            0% {
-                transform: translateX(0) translateY(0);
-            }
-
-            50% {
-                transform: translateX(20px) translateY(10px);
-            }
-
-            100% {
-                transform: translateX(0) translateY(0);
-            }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Botones en columna para móviles */
+            gap: 10px; /* Espacio entre botones */
         }
 
-        /* Efecto de niebla */
-        .fog {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-            animation: fogAnimation 15s linear infinite;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Botones ocupan todo el ancho */
         }
 
-        @keyframes fogAnimation {
-            0% {
-                opacity: 0.1;
-                transform: translateX(-100%) translateY(0);
+        #siBtn {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+
+        #siBtn:hover {
+            background-color: #27ae60;
+        }
+
+        #noBtn {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        #noBtn:hover {
+            background-color: #c0392b;
+        }
+
+        #respuesta {
+            margin-top: 20px;
+            font-size: 18px; /* Tamaño de fuente más pequeño para móviles */
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Estilos para pantallas más grandes (opcional) */
+        @media (min-width: 768px) {
+            .container {
+                width: 70%; /* Ajuste para tablets y pantallas más grandes */
             }
 
-            100% {
-                opacity: 0.3;
-                transform: translateX(100%) translateY(100px);
+            .buttons {
+                flex-direction: row; /* Botones en fila para pantallas grandes */
+            }
+
+            button {
+                width: auto; /* Botones no ocupan todo el ancho */
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="fog"></div>
-    <div id="giftBox">🎁</div>
-    <div id="message">💜Amor da minha eternidade 💜</div>
-    <img id="photo" src="assets/Amor.jpg" alt="Foto de amor">
-
+    <div class="container">
+        <h1>¡Hola, mi portuguesita!</h1>
+        <p>Desde que te conocí, mi mundo cambió por completo. Eres especial para mí y no puedo imaginar mi vida sin ti.</p>
+        <p>Por eso, hoy quiero hacerte una pregunta muy importante...</p>
+        <h2>¿Quieres ser mi San Valentín?</h2>
+        <div class="buttons">
+            <button id="siBtn">¡Sí!</button>
+            <button id="noBtn">No</button>
+        </div>
+        <p id="respuesta"></p>
+    </div>
     <script>
-        const giftBox = document.getElementById('giftBox');
-        const message = document.getElementById('message');
-        const photo = document.getElementById('photo');
-
-        const phrases = [
-            "Te amo", "Te adoro", "Te quiero", "Te admiro",
-            "Eres maravillosa", "Eres increíble", "Eres especial",
-            "Eres única", "Eres un monumento", "Eres mi diosa",
-            "Eres mi niña chiquitita", "Mi portuguesita"
-        ];
-
-        giftBox.addEventListener('click', () => {
-            giftBox.style.display = 'none';
-            message.style.display = 'block';
-            photo.style.display = 'block';
-
-            for (let i = 0; i < 50; i++) {
-                createParticle();
-                createFloatingText();
-            }
+        document.getElementById('siBtn').addEventListener('click', function() {
+            document.getElementById('respuesta').textContent = '¡Sabía que dirías que sí! 💖';
         });
 
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            particle.style.animationDuration = 5 + Math.random() * 5 + 's';
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 10000);
-        }
-
-        function createFloatingText() {
-            const text = document.createElement('div');
-            text.classList.add('floatingText');
-            text.style.left = Math.random() * window.innerWidth + 'px';
-            text.style.top = Math.random() * window.innerHeight + 'px';
-            text.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-            document.body.appendChild(text);
-            setTimeout(() => text.remove(), 8000);
-        }
+        document.getElementById('noBtn').addEventListener('click', function() {
+            document.getElementById('respuesta').textContent = '¡Vamos, dale otra oportunidad! 😢';
+        });
     </script>
 </body>
-
 </html>
